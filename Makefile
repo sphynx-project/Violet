@@ -50,6 +50,7 @@ $(EMU_BOOT_IMG): $(TARGET_EXE)
 	@sudo mount -o loop $(EMU_BOOT_IMG) mnt
 	@sudo mkdir -p mnt/EFI/BOOT
 	@sudo cp $(COMMON_DIR)/$(TARGET_EXE) mnt/EFI/BOOT/$(EMU_$(TARGET)_BOOT_FILE)
+	@sudo cp test.txt mnt/
 	@sudo umount mnt
 	@rm -rf mnt
 
