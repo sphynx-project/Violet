@@ -55,7 +55,7 @@ $(EMU_BOOT_IMG): $(TARGET_EXE)
 
 test: $(EMU_BOOT_IMG)
 	@echo "-> Running bootable UEFI image with QEMU"
-	@qemu-system-$(TARGET) -m 2G -drive if=pflash,format=raw,readonly=on,file=$(EMU_$(TARGET)_BIOS) -drive if=ide,format=raw,file=$(EMU_BOOT_IMG) -debugcon stdio
+	@qemu-system-$(TARGET) -m 2G -bios $(EMU_$(TARGET)_BIOS) -drive if=virtio,format=raw,file=$(EMU_BOOT_IMG) $(EMU_FLAGS)
 
 
 # Clean all build outputs

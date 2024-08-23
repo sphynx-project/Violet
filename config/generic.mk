@@ -21,3 +21,4 @@ EMU_x86_64_BIOS ?= /usr/share/ovmf/x64/OVMF.fd
 EMU_i386_BOOT_FILE ?= BOOTIA32.efi
 EMU_i386_BIOS ?= /usr/share/ovmf/ia32/OVMF.fd
 EMU_BOOT_IMG ?= boot.img
+EMU_FLAGS ?= 
