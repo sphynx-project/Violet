@@ -7,7 +7,7 @@ CC_EXE_FLAGS ?= -target $(EXE_TARGET) -ffreestanding -fshort-wchar \
                 -Wno-int-to-void-pointer-cast -Wno-int-to-pointer-cast $(CFLAGS)
 
 LD_EXE_FLAGS ?= -target $(EXE_TARGET) -nostdlib \
-                -Wl,-entry:_violet_$(TARGET)_dev_entry \
+                -Wl,-entry:_violet_$(TARGET)_$(BUILD_KIND)_entry\
                 -Wl,-subsystem:efi_application -fuse-ld=lld-link $(LDFLAGS)
 
 # Include the generic settings for this build type

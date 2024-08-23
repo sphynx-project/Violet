@@ -9,7 +9,7 @@ CC_EXE ?= clang
 LD_EXE ?= $(CC_EXE)
 
 # Common build settings
-CFLAGS ?= -I$(INCLUDE_DIR)
+CFLAGS ?= -I$(INCLUDE_DIR) -I$(PWD)/external
 LDFLAGS ?=
 
 # Common output settings
