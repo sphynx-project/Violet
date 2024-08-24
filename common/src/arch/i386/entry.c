@@ -3,7 +3,8 @@
 // "dev" build entry for i386
 EFI_STATUS _violet_i386_dev_entry(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
     __violet_init(ImageHandle, SystemTable);
-    SystemTable->ConOut->OutputString(SystemTable->ConOut, L"Hello, World i386!\r\n");
+    printf("Violet doesnt support i386 currently.\r\n");
+    // __violet_handle();
     for(;;);
 }
 

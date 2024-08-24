@@ -1,11 +1,17 @@
 #include <lib/alloc.h>
+#include <common.h>
 
-// Allocate memory using EfiLoaderData
+#define EFI_POOL EfiLoaderData
+
+// Allocate memory using the selected EFI memory type
 void *malloc(size_t size)
 {
     void *ptr;
-    if (EFI_ERROR(systemTable->BootServices->AllocatePool(EfiLoaderData, size, &ptr)))
+    EFI_STATUS status;
+    status = systemTable->BootServices->AllocatePool(EFI_POOL, size, &ptr);
+    if (EFI_ERROR(status))
     {
+        printf("[ERROR] Failed to allocate memory (Status: 0x%x)\r\n", status);
         return NULL;
     }
 
@@ -20,6 +26,7 @@ void free(void *ptr)
 // Copy memory from src to dest
 void CopyMem(void *dest, const void *src, size_t size)
 {
+    // Copy memory from src to dest
     char *d = dest;
     const char *s = src;
     while (size--)

@@ -1,5 +1,7 @@
 #include <common.h>
 
+#include <drivers/fs/sfs.h>
+#include <lib/alloc.h>
 
 #define NANOPRINTF_USE_FIELD_WIDTH_FORMAT_SPECIFIERS 1
 #define NANOPRINTF_USE_PRECISION_FORMAT_SPECIFIERS 1
@@ -57,4 +59,29 @@ void __violet_init(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
     stdout->SetAttribute(stdout, EFI_LIGHTGRAY | EFI_BACKGROUND_BLACK);
     stdout->SetCursorPosition(stdout, 0, 0);
     stdout->ClearScreen(stdout);
+}
+
+void __violet_handle() {
+    printf("Violet Running on %s (%s)\r\n", _VIOLET_TARGET, _VIOLET_BUILD);
+    SimpleFile test = sfs_open(L"\\test.txt");
+    if(EFI_ERROR(test.status)) {
+        printf("[ERROR] Failed to open \"\\test.txt\"\r\n");
+        for(;;);
+    }
+
+    char* buff = (char*)malloc(test.info.PhysicalSize);
+    if(buff == NULL) {
+        printf("[ERROR] Failed to allocate memory for file buffer\r\n");
+        for(;;);
+    }
+
+    sfs_read(&test, buff);
+    if(EFI_ERROR(test.status)) {
+        printf("[ERROR] Failed to read \"\\test.txt\"\r\n");
+        for(;;);
+    }
+
+    printf("%.*s\r\n", test.info.PhysicalSize, buff);
+    sfs_close(&test);
+    free(buff);
 }

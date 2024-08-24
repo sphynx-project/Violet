@@ -16,6 +16,8 @@ extern EFI_SIMPLE_TEXT_INPUT_PROTOCOL *stdin;
 extern EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *stderr;
 
 void __violet_init(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable);
+void __violet_handle();
+
 int printf(const char* fmt, ...);
 
 #endif // COMMON_H
